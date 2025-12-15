@@ -1,0 +1,68 @@
+[
+    {
+        "name": "Deacon St. John",
+        "role": "The Drifter",
+        "image": "days_gone_deacon_real.png",
+        "desc": "The protagonist of the entire saga. A former enforcer for the Mongrels MC, he rides the broken road from Belknap to Wizard Island searching for his wife."
+    },
+    {
+        "name": "Boozer",
+        "role": "The Loyalist",
+        "image": "days_gone_boozer.png",
+        "desc": "Deacon's brother-in-arms and closest friend. He is the emotional core of the 'He's My Brother' storyline, surviving severe injuries to stand by Deacon."
+    },
+    {
+        "name": "Sarah",
+        "role": "The Researcher",
+        "image": "days_gone_sarah.png",
+        "desc": "The driving force behind Deacon's journey in 'I Remember'. Presumed dead in the outbreak, she is eventually discovered deep in Militia territory."
+    },
+    {
+        "name": "Iron Mike",
+        "role": "The Leader",
+        "image": "days_gone_iron_mike.png",
+        "desc": "The pacifist leader of Lost Lake. In the 'We've All Done Things' storyline, he tries to forge a future where survivors hold onto their humanity."
+    },
+    {
+        "name": "Rikki Patil",
+        "role": "The Mechanic",
+        "image": "days_gone_rikki.png",
+        "desc": "A vital lieutenant at Lost Lake. She plays a key role in 'Earning Our Keep', driving the camp's survival and fixing everything Deacon breaks."
+    },
+    {
+        "name": "Raymond 'Skizzo' Sarkis",
+        "role": "The Traitor",
+        "image": "days_gone_skizzo.png",
+        "desc": "Head of Security at Lost Lake and a major antagonist. His paranoia and ambition in the 'Some Kinda Freak Expert' arc ultimately threaten the entire camp."
+    },
+    {
+        "name": "Col. Matthew Garret",
+        "role": "The Zealot",
+        "image": "days_gone_colonel_garret.png",
+        "desc": "The leader of the Deschutes County Militia on Wizard Island. He wages a fanatical 'Holy War' against the Freakers in the game's final act."
+    },
+    {
+        "name": "James O'Brian",
+        "role": "The NERO Scientist",
+        "image": "days_gone_obrian.png",
+        "desc": "The face of NERO. Appearing throughout the 'Finding NERO' storyline, his secret missions reveal the terrifying truth behind the virus."
+    },
+    {
+        "name": "Mark Copeland",
+        "role": "The Truther",
+        "image": "days_gone_copeland.png",
+        "desc": "The leader of the Copeland's Camp in Belknap. A conspiracy theorist who preaches 'The Truth' over the radio waves to anyone listening."
+    },
+    {
+        "name": "Ada Tucker",
+        "role": "The Warden",
+        "image": "days_gone_tucker.png",
+        "desc": "The overseer of the Hot Springs camp. A strict disciplinarian who believes 'Gear Up for the Ride' means forced labor is the price of safety."
+    },
+    {
+        "name": "Carlos",
+        "role": "The High Priest",
+        "image": "days_gone_carlos.png",
+        "desc": "Formerly known as Jessie, he leads the Rippers in the 'Ripped Apart' storyline, hunting Deacon and Boozer to settle an old MC vendetta."
+    }
+]

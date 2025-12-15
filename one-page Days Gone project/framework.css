@@ -1,0 +1,550 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Rye&display=swap');
+
+:root {
+    --primary-color: #b93b3b;
+    --secondary-color: #4a5d4e;
+    --bg-dark: #0f1012;
+    --bg-panel: #1a1c20;
+    --text-main: #e0e0e0;
+    --text-muted: #8a8a8a;
+
+    --font-heading: 'Rye', serif;
+    --font-body: 'Roboto Condensed', sans-serif;
+
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+}
+
+section {
+    padding: var(--spacing-lg) 0;
+    position: relative;
+    border-bottom: 1px solid #333;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: var(--font-heading);
+}
+
+.btn:hover {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Keyframe for Scenery Drift */
+@keyframes drift {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.8s ease-in-out;
+    z-index: 1;
+    /* Adding the drift effect */
+    animation: drift 10s infinite alternate linear;
+}
+
+.carousel-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9));
+}
+
+.carousel-content {
+    position: relative;
+    z-index: 10;
+    padding: 40px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* Stacks from top */
+    height: 100%;
+}
+
+.scenery-info {
+    text-align: center;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    margin-top: auto;
+    /* Pushes this and subsequent elements to the bottom */
+}
+
+.scenery-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.nav-thumb {
+    width: 120px;
+    height: 70px;
+    border: 2px solid #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+    transform: skewX(-10deg);
+    overflow: hidden;
+}
+
+.nav-thumb img {
+    width: 120%;
+    height: 100%;
+    object-fit: cover;
+    transform: skewX(10deg) translateX(-10px);
+}
+
+.nav-thumb.active,
+.nav-thumb:hover {
+    border-color: var(--primary-color);
+    opacity: 1;
+    transform: skewX(-10deg) scale(1.1);
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 20;
+    border: none;
+    transition: background 0.3s;
+}
+
+.nav-arrow:hover {
+    background: var(--primary-color);
+}
+
+.nav-prev {
+    left: 20px;
+}
+
+.nav-next {
+    right: 20px;
+}
+
+.character-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-dark);
+}
+
+.character-slider::-webkit-scrollbar {
+    height: 8px;
+}
+
+.character-slider::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+    border-radius: 4px;
+}
+
+.character-slider::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.character-slider::-webkit-scrollbar-thumb:hover {
+    background: #d64545;
+}
+
+@media (max-width: 768px) {
+
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+
+    #hero p {
+        font-size: 1.1rem;
+    }
+
+    #about .container>div {
+        grid-template-columns: 1fr !important;
+    }
+
+    #scenery {
+        height: auto;
+        min-height: 80vh;
+    }
+
+    .carousel-content {
+        padding: 20px;
+    }
+
+    #scenery-title {
+        font-size: 2rem !important;
+    }
+
+    #scenery-desc {
+        font-size: 1rem !important;
+    }
+
+    #story .container {
+        flex-direction: column;
+    }
+
+    #freakers .container>div {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        padding: 10px;
+    }
+}
+
+.roster-container-v2 {
+    display: flex;
+    gap: 0;
+    height: 600px;
+    background: var(--bg-dark);
+    border: 1px solid #333;
+    overflow: hidden;
+    position: relative;
+}
+
+.roster-menu-v2 {
+    flex: 0 0 250px;
+    background: #111;
+    overflow-y: auto;
+    border-right: 1px solid #333;
+    z-index: 20;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #111;
+}
+
+.roster-menu-v2::-webkit-scrollbar {
+    width: 6px;
+}
+
+.roster-menu-v2::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+}
+
+.menu-item-v2 {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-bottom: 1px solid #222;
+    transition: background 0.2s;
+}
+
+.menu-item-v2:hover,
+.menu-item-v2.active {
+    background: #1a1a1a;
+}
+
+.menu-item-v2.active {
+    border-left: 4px solid var(--primary-color);
+}
+
+.menu-thumb-v2 {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #333;
+}
+
+.menu-name-v2 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: #ddd;
+    margin-bottom: 10px;
+}
+
+.roster-btn {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 5px 15px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.roster-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.menu-item-v2.active .roster-btn {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.roster-stage-v2 {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.stage-image-v2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 85%;
+    width: auto;
+    max-width: 90%;
+    object-fit: contain;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0.8;
+}
+
+.roster-stage-v2.active .stage-image-v2 {
+    left: 75%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.stage-info-v2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    border-right: 2px solid var(--primary-color);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 1500;
+    /* FIXED: Higher than flying clone (1000) */
+}
+
+.roster-stage-v2.active .stage-info-v2 {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.info-role-v2 {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.info-title-v2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.info-desc-v2 {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .roster-container-v2 {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .roster-menu-v2 {
+        flex: none;
+        height: 250px;
+        width: 100%;
+    }
+
+    .roster-stage-v2 {
+        height: 400px;
+    }
+
+    .stage-image-v2 {
+        height: auto;
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .roster-stage-v2.active .stage-image-v2 {
+        left: 50%;
+        opacity: 0.2;
+    }
+
+    .stage-info-v2 {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        border: none;
+    }
+}
+
+/* SVG Artworks Styles */
+@keyframes float-grunge {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(5px, 10px) rotate(2deg);
+    }
+}
+
+.grunge-bg {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    animation: float-grunge 10s ease-in-out infinite;
+}
+
+.scratch-bg {
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(15deg);
+}
+
+.tire-divider {
+    z-index: 5;
+    pointer-events: none;
+}
+
+
+/* NERO Tech Styles */
+@keyframes flicker-hud {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    5%,
+    10% {
+        opacity: 0.2;
+    }
+
+    15% {
+        opacity: 0.6;
+    }
+
+    30% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    80% {
+        opacity: 0.3;
+    }
+}
+
+.nero-hud {
+    pointer-events: none;
+    z-index: 10;
+    mix-blend-mode: screen;
+    animation: flicker-hud 4s infinite step-end;
+}
+
+@keyframes spin-scope {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.tactical-bg {
+    animation: spin-scope 60s linear infinite;
+}

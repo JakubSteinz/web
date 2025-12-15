@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Gone - Ride the Broken Road</title>
+    <link rel="stylesheet" href="framework.css">
+</head>
+
+<body>
+
+    <!-- SVG Definitions (Hidden) -->
+    <svg style="display: none;">
+        <defs>
+            <!-- Grunge Splatter -->
+            <symbol id="grunge-splatter" viewBox="0 0 200 200">
+                <path
+                    d="M48.5,88.2 C35.2,76.5 25.1,102.1 12.5,108.5 C-3.5,116.6 -5.2,85.2 6.5,70.5 C19.5,54.2 45.2,65.1 52.5,50.5 C62.1,31.2 45.5,10.5 65.5,5.5 C82.1,1.2 92.5,25.1 108.5,18.5 C125.2,11.6 115.1,-5.2 135.5,8.5 C152.1,19.6 142.5,45.1 160.5,55.5 C178.2,65.8 205.1,55.2 198.5,82.5 C192.6,106.8 165.2,95.1 155.5,112.5 C146.1,129.4 168.5,145.2 152.5,158.5 C135.8,172.4 125.2,142.1 105.5,150.5 C88.8,157.6 95.2,185.2 75.5,178.5 C56.8,172.1 65.2,145.1 50.5,135.5 C32.8,123.9 5.1,135.2 15.5,115.5 C21.6,103.9 55.2,94.1 48.5,88.2 Z"
+                    fill="currentColor" />
+            </symbol>
+
+            <!-- Tire Track Pattern -->
+            <symbol id="tire-track" viewBox="0 0 100 20">
+                <path
+                    d="M0,0 L20,0 L25,5 L45,0 L65,0 L70,5 L90,0 L100,0 L100,20 L80,20 L75,15 L55,20 L35,20 L30,15 L10,20 L0,20 Z"
+                    fill="currentColor" />
+            </symbol>
+
+            <!-- Freaker Claw/Scratch -->
+            <symbol id="scratch-mark" viewBox="0 0 100 100">
+                <path d="M10,10 Q30,40 20,90 L15,95 Q25,40 5,10 Z" fill="currentColor" />
+                <path d="M40,5 Q60,35 50,85 L45,90 Q55,35 35,5 Z" fill="currentColor" />
+                <path d="M70,8 Q90,38 80,88 L75,93 Q85,38 65,8 Z" fill="currentColor" />
+            </symbol>
+
+            <!-- NERO HUD Elements -->
+            <symbol id="nero-hud-corner" viewBox="0 0 100 100">
+                <path d="M10,10 L40,10 L40,12 L12,12 L12,40 L10,40 Z" fill="currentColor" />
+                <rect x="15" y="15" width="5" height="5" fill="currentColor" />
+                <rect x="22" y="15" width="2" height="5" fill="currentColor" />
+            </symbol>
+
+            <!-- Torn Edge Divider -->
+            <symbol id="torn-edge" viewBox="0 0 1200 60" preserveAspectRatio="none">
+                <path
+                    d="M0,0 L1200,0 L1200,45 L1150,55 L1100,40 L1050,50 L1000,35 L950,55 L900,40 L850,50 L800,30 L750,55 L700,35 L650,50 L600,25 L550,55 L500,35 L450,50 L400,30 L350,55 L300,35 L250,50 L200,25 L150,55 L100,35 L50,50 L0,20 Z"
+                    fill="currentColor" />
+            </symbol>
+
+            <!-- Noise Texture -->
+            <filter id="noiseFilter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.6" stitchTiles="noStitch" result="noise" />
+                <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0" in="noise"
+                    result="coloredNoise" />
+            </filter>
+        </defs>
+        <!-- Faction Graffiti: Generic Wireless/Radio -->
+        <symbol id="graffiti-radio" viewBox="0 0 100 100">
+            <path d="M50,80 L50,20 M50,20 L30,40 M50,20 L70,40" stroke="currentColor" stroke-width="5" fill="none" />
+            <circle cx="50" cy="15" r="5" fill="currentColor" />
+            <path d="M20,50 Q10,70 20,90 M80,50 Q90,70 80,90" stroke="currentColor" stroke-width="3" fill="none" />
+        </symbol>
+
+        <!-- Faction Graffiti: Shield/Tent -->
+        <symbol id="graffiti-shield" viewBox="0 0 100 100">
+            <path d="M50,10 L90,20 V50 Q90,80 50,95 Q10,80 10,50 V20 Z" stroke="currentColor" stroke-width="5"
+                fill="none" />
+            <path d="M30,30 L70,70 M70,30 L30,70" stroke="currentColor" stroke-width="3" />
+        </symbol>
+
+        <!-- Tactical Scope -->
+        <symbol id="tactical-scope" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="90" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-dasharray="10 5" />
+            <line x1="100" y1="0" x2="100" y2="200" stroke="currentColor" stroke-width="1" />
+            <line x1="0" y1="100" x2="200" y2="100" stroke="currentColor" stroke-width="1" />
+            <path d="M80,100 L120,100 M100,80 L100,120" stroke="currentColor" stroke-width="2" />
+        </symbol>
+
+        <!-- Biohazard Symbol -->
+        <symbol id="biohazard" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="10" fill="currentColor" />
+            <path d="M50,20 A30,30 0 0,1 75,35 L65,45 A15,15 0 0,0 50,35 Z" fill="currentColor" />
+            <path d="M25,35 A30,30 0 0,1 50,20 L50,35 A15,15 0 0,0 35,45 Z" fill="currentColor" />
+            <path d="M50,80 A30,30 0 0,1 25,65 L35,55 A15,15 0 0,0 50,65 Z" fill="currentColor" />
+            <path d="M75,65 A30,30 0 0,1 50,80 L50,65 A15,15 0 0,0 65,55 Z" fill="currentColor" />
+        </symbol>
+
+        <!-- Forest Silhouette -->
+        <symbol id="forest-sil" viewBox="0 0 100 20" preserveAspectRatio="none">
+            <path d="M0,20 L10,10 L15,15 L20,5 L25,18 L30,8 L40,18 L50,4 L60,18 L70,8 L75,15 L80,5 L90,15 L100,20 Z"
+                fill="currentColor" />
+        </symbol>
+        </defs>
+    </svg>
+
+    <!-- Global Noise Overlay -->
+    <div
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9000; opacity: 0.1;">
+        <svg width="100%" height="100%">
+            <rect width="100%" height="100%" filter="url(#noiseFilter)"></rect>
+        </svg>
+    </div>
+
+    <nav
+        style="position: fixed; top: 0; width: 100%; padding: 20px; background: rgba(15,16,18,0.9); z-index: 100; display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-family: 'Rye'; font-size: 1.5rem; color: var(--primary-color);">DAYS GONE</div>
+    </nav>
+
+    <section id="hero"
+        style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('days_gone_hero_real.jpg') no-repeat center center/cover; overflow: hidden;">
+        <!-- Grunge Overlay -->
+        <svg class="grunge-bg"
+            style="top: -50px; left: -50px; width: 300px; height: 300px; opacity: 0.6; color: var(--primary-color);">
+            <use href="#grunge-splatter"></use>
+        </svg>
+        <svg class="grunge-bg"
+            style="bottom: -50px; right: -50px; width: 400px; height: 400px; opacity: 0.4; color: #000; transform: rotate(180deg);">
+            <use href="#grunge-splatter"></use>
+        </svg>
+
+        <!-- NERO HUD Overlays -->
+        <svg class="nero-hud top-left"
+            style="position: absolute; top: 100px; left: 50px; width: 100px; height: 100px; color: rgba(255,255,255,0.5);">
+            <use href="#nero-hud-corner"></use>
+        </svg>
+        <svg class="nero-hud top-right"
+            style="position: absolute; top: 100px; right: 50px; width: 100px; height: 100px; color: rgba(255,255,255,0.5); transform: scaleX(-1);">
+            <use href="#nero-hud-corner"></use>
+        </svg>
+        <svg class="nero-hud bottom-left"
+            style="position: absolute; bottom: 50px; left: 50px; width: 100px; height: 100px; color: rgba(255,255,255,0.5); transform: scaleY(-1);">
+            <use href="#nero-hud-corner"></use>
+        </svg>
+        <svg class="nero-hud bottom-right"
+            style="position: absolute; bottom: 50px; right: 50px; width: 100px; height: 100px; color: rgba(255,255,255,0.5); transform: scale(-1);">
+            <use href="#nero-hud-corner"></use>
+        </svg>
+
+        <div class="container" style="text-align: center; position: relative; z-index: 2;">
+            <h1 style="font-size: 4rem; margin-bottom: 20px; text-shadow: 2px 2px 4px #000;">Ride the Broken Road</h1>
+            <p style="font-size: 1.5rem; max-width: 600px; margin: 0 auto 30px; text-shadow: 1px 1px 2px #000;">Step
+                into the dirt-flecked boots of Deacon St. John, a bounty hunter riding through a world gone to hell.</p>
+            <a href="#about" class="btn">Explore the World</a>
+        </div>
+
+        <!-- Tire Track Divider REPLACED with Torn Edge for blend, or kept as layer -->
+        <div class="tire-divider"
+            style="position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; overflow: hidden; opacity: 0.8; z-index: 5;">
+            <!-- Combined Tire & Torn Edge -->
+            <svg width="100%" height="100%" preserveAspectRatio="none">
+                <pattern id="tirePattern" x="0" y="0" width="100" height="40" patternUnits="userSpaceOnUse">
+                    <use href="#tire-track" width="100" height="40" style="color: #0f1012;"></use>
+                </pattern>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#tirePattern)"></rect>
+            </svg>
+        </div>
+        <!-- Torn Edge Transition -->
+        <div
+            style="position: absolute; bottom: -1px; left: 0; width: 100%; height: 60px; z-index: 6; color: var(--bg-dark);">
+            <svg width="100%" height="100%" preserveAspectRatio="none">
+                <use href="#torn-edge" y="10"></use>
+            </svg>
+        </div>
+    </section>
+
+    <section id="about" style="position: relative; overflow: hidden;">
+        <!-- Scratch Marks Background -->
+        <svg class="scratch-bg"
+            style="position: absolute; top: 20px; right: 10%; width: 200px; height: 200px; opacity: 0.1; color: var(--primary-color);">
+            <use href="#scratch-mark"></use>
+        </svg>
+        <div class="container">
+            <h2 style="font-size: 3rem; margin-bottom: 40px; text-align: center;">This World comes for you</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">Days Gone is an open-world action-adventure game
+                        set in a harsh wilderness two years after a devastating global pandemic.</p>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem;">Play as Deacon St. John, a drifter and bounty
+                        hunter who rides the broken road, fighting to survive while searching for a reason to live.</p>
+                </div>
+                <div>
+                    <img src="days_gone_horde_real.png" alt="Freakers"
+                        style="width: 100%; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="scenery">
+        <div class="carousel-background" id="scenery-bg" style="background-image: url('days_gone_scenery_1.png');">
+        </div>
+
+        <button class="nav-arrow nav-prev" onclick="prevSlide()">&#10094;</button>
+        <button class="nav-arrow nav-next" onclick="nextSlide()">&#10095;</button>
+
+        <div class="carousel-content">
+            <h2 style="font-size: 3rem; margin-bottom: 20px; color: #fff; text-shadow: 2px 2px 4px #000;">
+                The Farewell Wilderness</h2>
+
+            <div class="scenery-info">
+                <h3 id="scenery-title"
+                    style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 15px; text-shadow: 2px 2px 4px #000;">
+                    High Desert</h3>
+                <p id="scenery-desc"
+                    style="font-size: 1.3rem; color: #fff; text-shadow: 1px 1px 2px #000; max-width: 700px; margin: 0 auto;">
+                    Arid, open plains where the heat beats down. Speed is your only ally here.</p>
+            </div>
+
+            <div class="scenery-nav">
+                <div class="nav-thumb active" onclick="goToSlide(0)">
+                    <img src="days_gone_scenery_1.png" alt="High Desert">
+                </div>
+                <div class="nav-thumb" onclick="goToSlide(1)">
+                    <img src="days_gone_scenery_2.png" alt="Cascades">
+                </div>
+                <div class="nav-thumb" onclick="goToSlide(2)">
+                    <img src="days_gone_scenery_3.png" alt="Lost Lake">
+                </div>
+                <div class="nav-thumb" onclick="goToSlide(3)">
+                    <img src="days_gone_scenery_4.png" alt="Belknap">
+                </div>
+                <div class="nav-thumb" onclick="goToSlide(4)">
+                    <img src="days_gone_scenery_5.png" alt="Broken Road">
+                </div>
+                <div class="nav-thumb" onclick="goToSlide(5)">
+                    <img src="days_gone_scenery_6.png" alt="Iron Butte">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story"
+        style="background-color: #151515; padding: 80px 0; border-top: 1px solid #333; border-bottom: 1px solid #333;">
+        <div class="container" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px;">
+            <div style="flex: 1; min-width: 300px;">
+                <h2 style="font-size: 3rem; margin-bottom: 20px; color: var(--primary-color);">Days Gone By</h2>
+                <h3 style="font-size: 1.5rem; color: #ccc; margin-bottom: 30px;">The Long Road Home</h3>
+
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">I. The Fall of Farewell</h4>
+                    <p style="font-size: 1rem; line-height: 1.7; color: #aaa;">
+                        It started with a virus. Within days, the world turned into a nightmare of flesh-eating
+                        Freakers. In the panic at the NERO checkpoint, Deacon St. John placed his critically injured
+                        wife, Sarah, on one of the last refugee helicopters. But there was only room for two. Faced with
+                        leaving his best friend Boozer alone in the chaos, Deacon made the impossible choice: he stayed
+                        behind. He watched the chopper fly away, believing he had saved her life. That was 730 days ago.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 30px; position: relative;">
+                    <svg class="faction-graffiti"
+                        style="position: absolute; right: 0; top: 0; width: 150px; height: 150px; opacity: 0.1; color: #aaa;">
+                        <use href="#graffiti-radio"></use>
+                    </svg>
+                    <h4 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">II. Brothers in the Shit</h4>
+                    <p style="font-size: 1rem; line-height: 1.7; color: #aaa;">
+                        Two years later, Deacon and Boozer survive as drifters, running runs for camp leaders like the
+                        conspiracy theorist <strong>Mark Copeland</strong> and the slave-driving warden <strong>Ada
+                            Tucker</strong>. Their plan to
+                        ride North is shattered when Boozer is severely burned by the Rippers, a cult worshiping
+                        Freakers led by the insane <strong>Carlos</strong>. Now grounded, Deacon must navigate the tense
+                        politics of
+                        these rival camps just to keep his brother alive.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">III. Ghosts of NERO</h4>
+                    <p style="font-size: 1rem; line-height: 1.7; color: #aaa;">
+                        Deacon spots a black NERO helicopter—the same kind that took Sarah. He tracks down NERO
+                        scientist <strong>James O'Brian</strong>, revealing a shocking truth: Sarah's camp wasn't
+                        overrun; she was
+                        moved. Fueled by a ghost of hope, Deacon begins a dangerous double life, doing dirty work for
+                        O'Brian in exchange for information on Sarah's whereabouts.
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 30px; position: relative;">
+                    <svg class="faction-graffiti"
+                        style="position: absolute; left: 50%; top: 0px; width: 120px; height: 120px; opacity: 0.1; color: var(--primary-color);">
+                        <use href="#graffiti-shield"></use>
+                    </svg>
+                    <h4 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">IV. Lost Lake & The Militia</h4>
+                    <p style="font-size: 1rem; line-height: 1.7; color: #aaa;">
+                        Deacon finds refuge at <strong>Iron Mike's</strong> Lost Lake camp. But peace is fragile.
+                        Betrayed by
+                        <strong>Skizzo</strong>, the camp's treacherous head of security, Deacon is forced south over
+                        the Thielsen
+                        Pass. There, in the territory of the Deschutes County Militia, he finds the impossible: Sarah is
+                        alive, working as a researcher for the militia's fanatical leader, <strong>Colonel
+                            Garret</strong>.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">V. The End of the World</h4>
+                    <p style="font-size: 1rem; line-height: 1.7; color: #aaa;">
+                        The reunion isn't the fairytale Deacon imagined. Sarah is hardening by her mission, and
+                        <strong>Colonel Garret</strong> is descending into madness, planning a holy war. Deacon rallies
+                        his allies
+                        from Lost Lake. In an all-out assault, Deacon defeats the Colonel, dismantles the Militia, and
+                        finally claims his future with Sarah. They ride out together, no longer just surviving, but
+                        living.
+                    </p>
+                </div>
+            </div>
+            <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 20px;">
+                <img src="days_gone_story_nero.png" alt="Deacon watching NERO Helicopter"
+                    style="width: 100%; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); border: 1px solid #444;">
+                <img src="days_gone_scenery_5.png" alt="Broken Road"
+                    style="width: 100%; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); border: 1px solid #444; opacity: 0.8;">
+            </div>
+        </div>
+    </section>
+
+    <section id="characters" style="background-color: var(--bg-panel); position: relative; overflow: hidden;">
+        <!-- Tactical Scope Overlay -->
+        <svg class="tactical-bg"
+            style="position: absolute; top: 50%; left: 50%; width: 80%; height: 80%; max-width: 600px; transform: translate(-50%, -50%); opacity: 0.05; color: var(--primary-color); pointer-events: none;">
+            <use href="#tactical-scope"></use>
+        </svg>
+        <div class="container" style="position: relative; z-index: 2;">
+            <h2 style="font-size: 3rem; margin-bottom: 40px; text-align: center;">Survivors</h2>
+            <div id="character-roster-v2" style="min-height: 500px;">
+                <p style="padding: 20px; color: #aaa;">Initializing Database V2...</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="freakers" style="background-color: var(--bg-dark); position: relative;">
+        <!-- Biohazard Icon -->
+        <svg class="biohazard-bg"
+            style="position: absolute; top: 20px; left: 20px; width: 150px; height: 150px; opacity: 0.15; color: #ffcc00;">
+            <use href="#biohazard"></use>
+        </svg>
+        <div class="container">
+            <h2 style="font-size: 3rem; margin-bottom: 40px; text-align: center; color: #a33;">The Freakers</h2>
+            <div id="freaker-roster-v2" style="min-height: 500px;">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" style="position: relative; overflow: hidden;">
+        <svg class="grunge-bg"
+            style="top: 50%; left: 0; width: 600px; height: 600px; opacity: 0.05; color: #fff; transform: translate(-50%, -50%);">
+            <use href="#grunge-splatter"></use>
+        </svg>
+        <div class="container" style="text-align: center;">
+            <h2 style="font-size: 3rem; margin-bottom: 40px;">Survive the Infestation</h2>
+            <p style="margin-bottom: 40px; font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Use your bike, your wits, and your weapons to fight against the Horde. Scavenge for resources, craft
+                weapons, and customize your drifter bike to navigate the broken road.
+            </p>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;">
+                <div style="background: var(--bg-panel); padding: 30px; border: 1px solid #333; text-align: left;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">The Drifter Bike</h3>
+                    <p>Your lifeline. Upgrade performance, durability, and storage to survive the ever-changing
+                        environment.</p>
+                </div>
+                <div style="background: var(--bg-panel); padding: 30px; border: 1px solid #333; text-align: left;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">Horde Combat</h3>
+                    <p>Face massive Hordes of Freakers. Use traps, explosives, and the environment to thin their
+                        numbers.</p>
+                </div>
+                <div style="background: var(--bg-panel); padding: 30px; border: 1px solid #333; text-align: left;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">Dynamic World</h3>
+                    <p>Weather affects gameplay and Freaker behavior. Adapt to rain, snow, and the dangerous day/night
+                        cycle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer
+        style="padding: 0; background: #000; text-align: center; border-top: 1px solid #333; position: relative; overflow: hidden;">
+        <!-- Forest Silhouette -->
+        <svg style="display: block; width: 100%; height: 100px; color: #111; margin-bottom: -1px;">
+            <use href="#forest-sil"></use>
+        </svg>
+        <div style="padding: 40px 0; position: relative; z-index: 2; background: #050505;">
+            <p>&copy; 2025 Days Gone Fan Page. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="anims.js"></script>
+</body>
+
+</html>
