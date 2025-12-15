@@ -1,0 +1,1 @@
+Zde mám projekt one-page web page pro hru Days gone, webovou stránku tvořím kvůli tomu, že hra je velmi nádherně dělaná a propracovaná. Bohužel jsem teprve teď udělal repozitář, takže všechny updaty jsou aktuální, nějaké změny se projeví přes čas :)
